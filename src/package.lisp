@@ -14,7 +14,7 @@
            #:*fetch-timeout*))
 
 (defpackage #:fetch-gist.html
-  (:use #:cl #:alexandria #:serapeum)
+  (:use #:cl #:alexandria #:serapeum #:esrap)
   (:shadowing-import-from #:iterate
                           #:in #:until #:count)
   (:import-from #:iterate

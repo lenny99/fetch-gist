@@ -1,0 +1,46 @@
+#!/bin/sh
+#|-*- mode:lisp -*-|#
+#|
+exec ros -Q -- $0 "$@"
+|#
+
+(defpackage :ros-script.fetch-gist
+  (:use :cl)
+  (:export #:main))
+
+(in-package :ros-script.fetch-gist)
+
+(push (make-pathname :defaults *load-truename* :name nil :type nil)
+      asdf:*central-registry*)
+
+(defun build ()
+  (ql:quickload "fetch-gist")
+  (format t "fetch-gist built successfully.~%"))
+
+(defun test ()
+  (ql:quickload "fetch-gist")
+  (asdf:test-system "fetch-gist"))
+
+(defun usage (&optional (stream *standard-output*))
+  (format stream "Usage: fetch-gist.ros <build|test>~%")
+  (format stream "~@{~A~%~}"
+          "Commands:"
+          "  build  Load and compile the fetch-gist system."
+          "  test   Load fetch-gist and run its test suite."))
+
+(defun main (&rest args)
+  (let ((subcommand (first args)))
+    (cond
+      ((or (null subcommand) (string= subcommand "help") (string= subcommand "--help"))
+       (usage)
+       (uiop:quit 0))
+      ((string= subcommand "build")
+       (build)
+       (uiop:quit 0))
+      ((string= subcommand "test")
+       (test)
+       (uiop:quit 0))
+      (t
+       (format *error-output* "fetch-gist.ros: unknown subcommand: ~A~%" subcommand)
+       (usage *error-output*)
+       (uiop:quit 1)))))
