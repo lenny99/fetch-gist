@@ -1,0 +1,8 @@
+(:kind :START-TAG :tag "div" :attrs NIL :data NIL)
+(:kind :START-TAG :tag "p" :attrs NIL :data NIL)
+(:kind :START-TAG :tag "em" :attrs NIL :data NIL)
+(:kind :TEXT :tag NIL :attrs NIL :data "x")
+(:kind :END-TAG :tag "em" :attrs NIL :data NIL)
+(:kind :END-TAG :tag "p" :attrs NIL :data NIL)
+(:kind :END-TAG :tag "div" :attrs NIL :data NIL)
+(:kind :TEXT :tag NIL :attrs NIL :data "\n")

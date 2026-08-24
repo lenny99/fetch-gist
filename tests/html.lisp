@@ -19,3 +19,15 @@
 (deftest tokenize-html/attributes-produce-an-element-token
   (ok (snapshot-tokens "fixtures/04-attributes"
                        (tokenize (read-fixture "04-attributes.html")))))
+
+(deftest tokenize-html/whitespace-and-case-are-normalized
+  (ok (snapshot-tokens "fixtures/05-whitespace-case"
+                       (tokenize (read-fixture "05-whitespace-case.html")))))
+
+(deftest tokenize-html/nested-elements-produce-nested-token-sequence
+  (ok (snapshot-tokens "fixtures/06-nested"
+                       (tokenize (read-fixture "06-nested.html")))))
+
+(deftest tokenize-html/special-elements-produce-special-token-sequence
+  (ok (snapshot-tokens "fixtures/07-special"
+                       (tokenize (read-fixture "07-special.html")))))

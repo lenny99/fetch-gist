@@ -82,6 +82,25 @@
                 :tag (second parts)
                 :attrs nil)))
 
+(esrap:defrule html-comment
+    (and "<!--" (* (and (! "-->") character)) "-->")
+  (:lambda (parts)
+    (make-token :kind :comment
+                :data (flatten-characters (second parts)))))
+
+(esrap:defrule html-cdata
+    (and "<![CDATA[" (* (and (! "]]>") character)) "]]>")
+  (:lambda (parts)
+    (make-token :kind :cdata
+                :data (flatten-characters (second parts)))))
+
+(esrap:defrule html-processing-instruction
+    (and "<?" html-name (* (and (! "?>") character)) "?>")
+  (:lambda (parts)
+    (make-token :kind :processing-instruction
+                :tag (second parts)
+                :data (flatten-characters (third parts)))))
+
 (esrap:defrule html-doctype
     (and (~ "<!doctype") (* (and (! #\>) character)) #\>)
   (:lambda (parts)
@@ -90,7 +109,8 @@
                                    (flatten-characters (second parts))))))
 
 (esrap:defrule html-token
-    (or html-doctype html-end-tag html-start-tag html-text))
+    (or html-doctype html-comment html-cdata html-processing-instruction
+        html-end-tag html-start-tag html-text))
 
 (defun token-at (input position)
   (let ((remaining-input (subseq input position)))
