@@ -1,0 +1,6 @@
+(:kind :START-TAG :tag "br" :attrs NIL :data NIL)
+(:kind :TEXT :tag NIL :attrs NIL :data "\n")
+(:kind :START-TAG :tag "img" :attrs (("src" . "x.png")) :data NIL)
+(:kind :TEXT :tag NIL :attrs NIL :data "\n")
+(:kind :START-TAG :tag "meta" :attrs (("charset" . "utf-8")) :data NIL)
+(:kind :TEXT :tag NIL :attrs NIL :data "\n")

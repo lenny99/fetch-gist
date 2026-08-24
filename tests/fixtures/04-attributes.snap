@@ -1,0 +1,4 @@
+(:kind :START-TAG :tag "a" :attrs (("href" . "https://example.com") ("class" . "link-class") ("id" . "link1")) :data NIL)
+(:kind :TEXT :tag NIL :attrs NIL :data "link")
+(:kind :END-TAG :tag "a" :attrs NIL :data NIL)
+(:kind :TEXT :tag NIL :attrs NIL :data "\n")

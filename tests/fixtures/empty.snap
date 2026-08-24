@@ -4,7 +4,7 @@
 (:kind :TEXT :tag NIL :attrs NIL :data "\n")
 (:kind :START-TAG :tag "head" :attrs NIL :data NIL)
 (:kind :TEXT :tag NIL :attrs NIL :data "\n")
-(:kind :START-TAG :tag "meta" :attrs NIL :data NIL)
+(:kind :START-TAG :tag "meta" :attrs (("charset" . "utf-8")) :data NIL)
 (:kind :TEXT :tag NIL :attrs NIL :data "\n")
 (:kind :START-TAG :tag "title" :attrs NIL :data NIL)
 (:kind :END-TAG :tag "title" :attrs NIL :data NIL)

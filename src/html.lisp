@@ -28,7 +28,7 @@
                  ((consp item)
                   (dolist (child item)
                     (write-item child))))))
-      (write-item items))))
+       (write-item items))))
 
 (esrap:defrule html-name
     (+ (html-name-character-p character))
@@ -44,12 +44,36 @@
     (make-token :kind :text
                 :data (flatten-characters characters))))
 
+(esrap:defrule html-attribute-value
+    (or (and #\" (* (and (! #\") character)) #\")
+        (and #\' (* (and (! #\') character)) #\')
+        (+ (and (! (or #\Space #\Tab #\Newline #\Return #\>)) character)))
+  (:lambda (parts)
+    (flatten-characters (if (characterp (first parts))
+                            (second parts)
+                            parts))))
+
+(esrap:defrule html-attribute
+    (or (and html-name (* html-whitespace) #\= (* html-whitespace)
+             html-attribute-value)
+        html-name)
+  (:lambda (parts)
+    (if (stringp parts)
+        (list :attribute parts nil)
+        (list :attribute (first parts) (fifth parts)))))
+
 (esrap:defrule html-start-tag
-    (and #\< html-name (* (and (! #\>) character)) #\>)
+    (and #\< html-name (* (or html-whitespace html-attribute)) #\>)
   (:lambda (parts)
     (make-token :kind :start-tag
                 :tag (second parts)
-                :attrs nil)))
+                :attrs (mapcar (lambda (item)
+                                 (cons (second item) (third item)))
+                               (remove-if-not
+                                (lambda (item)
+                                  (and (consp item)
+                                       (eq (first item) :attribute)))
+                                 (third parts))))))
 
 (esrap:defrule html-end-tag
     (and "</" html-name (* html-whitespace) #\>)
