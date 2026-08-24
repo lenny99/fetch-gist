@@ -1,0 +1,4 @@
+(:kind :START-TAG :tag "p" :attrs NIL :data NIL)
+(:kind :TEXT :tag NIL :attrs NIL :data "hello")
+(:kind :END-TAG :tag "p" :attrs NIL :data NIL)
+(:kind :TEXT :tag NIL :attrs NIL :data "\n")

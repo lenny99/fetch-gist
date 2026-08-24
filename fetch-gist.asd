@@ -27,10 +27,11 @@
   :depends-on (#:fetch-gist
                #:rove)
   :components ((:module "tests"
-                :serial t
-                :components ((:file "package")
-                             (:file "suite")
-                             (:file "html"))))
+                 :serial t
+                 :components ((:file "package")
+                              (:file "suite")
+                              (:file "snapshots")
+                              (:file "html"))))
   :perform (asdf:test-op (operation component)
              (declare (ignore operation))
              (uiop:symbol-call '#:rove '#:run component)))
