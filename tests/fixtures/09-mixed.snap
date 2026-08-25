@@ -1,0 +1,8 @@
+(:kind :START-TAG :tag "p" :attrs NIL :data NIL)
+(:kind :TEXT :tag NIL :attrs NIL :data "hi ")
+(:kind :START-TAG :tag "strong" :attrs NIL :data NIL)
+(:kind :TEXT :tag NIL :attrs NIL :data "there")
+(:kind :END-TAG :tag "strong" :attrs NIL :data NIL)
+(:kind :TEXT :tag NIL :attrs NIL :data "!")
+(:kind :END-TAG :tag "p" :attrs NIL :data NIL)
+(:kind :TEXT :tag NIL :attrs NIL :data "\n")

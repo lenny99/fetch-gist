@@ -31,3 +31,19 @@
 (deftest tokenize-html/special-elements-produce-special-token-sequence
   (ok (snapshot-tokens "fixtures/07-special"
                        (tokenize (read-fixture "07-special.html")))))
+
+(deftest tokenize-html/entities-remain-in-text-token
+  (ok (snapshot-tokens "fixtures/08-entities"
+                       (tokenize (read-fixture "08-entities.html")))))
+
+(deftest tokenize-html/mixed-content-produces-ordered-token-sequence
+  (ok (snapshot-tokens "fixtures/09-mixed"
+                       (tokenize (read-fixture "09-mixed.html")))))
+
+(deftest tokenize-html/malformed-input-recovers-as-text
+  (ok (snapshot-tokens "fixtures/10-malformed"
+                       (tokenize (read-fixture "10-malformed.html")))))
+
+(deftest tokenize-html/real-world-document-produces-ordered-token-sequence
+  (ok (snapshot-tokens "fixtures/11-real-world"
+                       (tokenize (read-fixture "11-real-world.html")))))
