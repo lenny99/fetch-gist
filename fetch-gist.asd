@@ -16,9 +16,10 @@
   :components ((:module "src"
                  :serial t
                   :components ((:file "package")
-                                  (:file "fetch")
-                                  (:file "html")
-                                 (:file "markdown"))))
+                                   (:file "fetch")
+                                   (:file "html")
+                                  (:file "markdown")
+                                  (:file "cli"))))
   :in-order-to ((test-op (test-op #:fetch-gist/tests))))
 
 (asdf:defsystem #:fetch-gist/tests
