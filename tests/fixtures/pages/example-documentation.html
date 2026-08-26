@@ -1,0 +1,55 @@
+<!doctype html>
+<html>
+<head>
+  <title>Acme API Documentation</title>
+  <style>
+    body { font-family: sans-serif; }
+    .deprecated { color: red; }
+  </style>
+  <script>
+    document.querySelector("body").classList.add("loaded");
+  </script>
+</head>
+<body>
+  <header>
+    <h1>Acme API</h1>
+    <p>The <strong>simple</strong> API for <em>reliable</em> widgets.</p>
+  </header>
+
+  <main>
+    <h2>Getting started</h2>
+    <p>Install the client with <code>npm install acme-client</code>.</p>
+    <p>Read the <a href="https://docs.example.com/auth">authentication guide</a>
+      or <a href="/reference">API reference</a>.</p>
+
+    <h3>Create a widget</h3>
+    <pre><code>const client = new AcmeClient({ token });
+const widget = await client.widgets.create({ name: "demo" });</code></pre>
+
+    <h3>Request options</h3>
+    <ul>
+      <li><strong>name</strong> is required.</li>
+      <li><code>color</code> defaults to <code>&quot;blue&quot;</code>.</li>
+      <li>Use <code>dryRun</code> to validate without saving.</li>
+    </ul>
+
+    <h3>Response status</h3>
+    <ol>
+      <li>Send the request.</li>
+      <li>Check the <code>201</code> response.</li>
+      <li>Store the returned widget ID.</li>
+    </ol>
+
+    <blockquote>
+      <p>Keep API tokens private. Never commit them to source control.</p>
+    </blockquote>
+
+    <p><img src="/images/widget.png" alt="A widget in the Acme dashboard"> Use
+      <kbd>Ctrl</kbd> + <kbd>K</kbd> to open the command palette.<br>
+      The API supports Tom &amp; Jerry names.</p>
+
+    <p class="deprecated">This legacy endpoint is deprecated.</p>
+  </main>
+
+</body>
+</html>
