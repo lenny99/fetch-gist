@@ -15,8 +15,9 @@
                #:serapeum)
   :components ((:module "src"
                  :serial t
-                 :components ((:file "package")
-                                 (:file "html")
+                  :components ((:file "package")
+                                  (:file "fetch")
+                                  (:file "html")
                                  (:file "markdown"))))
   :in-order-to ((test-op (test-op #:fetch-gist/tests))))
 
@@ -31,8 +32,9 @@
                  :serial t
                  :components ((:file "package")
                                (:file "suite")
-                               (:file "snapshots")
-                               (:file "html")
+                                (:file "snapshots")
+                                (:file "fetch")
+                                (:file "html")
                                (:file "markdown"))))
   :perform (asdf:test-op (operation component)
              (declare (ignore operation))

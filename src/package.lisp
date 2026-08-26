@@ -8,6 +8,7 @@
   (:export #:fetch-url
            #:fetch-url-to-string
            #:html-content-type-p
+           #:markdown-content-type-p
            #:markdown-from-string
            #:markdown-from-file
            #:markdown-from-url
