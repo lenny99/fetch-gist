@@ -18,9 +18,7 @@
   (pre-depth 0)
   (blockquote-depth 0)
   blockquote-started
-  list-stack
-  table-stack
-  table-row)
+  list-stack)
 
 (defun emit-char (context character)
   (write-char character (markdown-context-stream context))
@@ -297,6 +295,11 @@
   (header nil :type list)
   (rows   nil :type list))
 
+(defstruct markdown-table-state
+  (table-stack nil :type list)
+  (table-row   nil :type list))
+
+
 (defun table-cell-text (string)
   (with-output-to-string (out)
     (let ((pending nil))
@@ -353,30 +356,47 @@
 
 (defun render-table (context node)
   (begin-block context)
-  (let ((table (make-markdown-table)))
-    (push table (markdown-context-table-stack context))
-    (render-children context node)
-    (pop (markdown-context-table-stack context))
+  (let* ((table (make-markdown-table))
+         (state (make-markdown-table-state :table-stack (list table))))
+    (collect-table-rows context (node-children node) state)
     (emit-string context (markdown-table-format table)))
   (end-block context))
 
-(defun render-table-row (context node)
-  (render-children context node)
-  (let ((row (nreverse (markdown-context-table-row context)))
-        (table (first (markdown-context-table-stack context))))
-    (setf (markdown-context-table-row context) nil)
+(defun collect-table-rows (context children state)
+  (dolist (child children)
+    (when (element-p child)
+      (let ((tag (node-tag child)))
+        (cond
+          ((string= tag "tr")
+           (collect-table-row context child state))
+          ((member tag '("thead" "tbody" "tfoot") :test #'string=)
+           (collect-table-rows context (node-children child) state)))))))
+
+(defun collect-table-row (context node state)
+  (collect-table-cells context (node-children node) state)
+  (let ((row (nreverse (markdown-table-state-table-row state)))
+        (table (first (markdown-table-state-table-stack state))))
+    (setf (markdown-table-state-table-row state) nil)
     (when (and table row)
       (push row (markdown-table-rows table)))))
 
-(defun render-table-cell (context node headerp)
+(defun collect-table-cells (context children state)
+  (dolist (child children)
+    (when (element-p child)
+      (let ((tag (node-tag child)))
+        (cond
+          ((string= tag "th") (collect-table-cell context child state t))
+          ((string= tag "td") (collect-table-cell context child state nil)))))))
+
+(defun collect-table-cell (context node state headerp)
   (let ((value (table-cell-text
                 (with-captured-output (context)
                   (render-children context node))))
-        (table (first (markdown-context-table-stack context))))
+        (table (and state (first (markdown-table-state-table-stack state)))))
     (cond
       ((null table) (emit-string context value))
       (headerp (push value (markdown-table-header table)))
-      (t (push value (markdown-context-table-row context))))))
+      (t (push value (markdown-table-state-table-row state))))))
 
 (dolist (tag *skipped-elements*)
   (setf (gethash tag *element-handlers*) #'render-skipped))
@@ -411,9 +431,9 @@
 (define-element "hr" (context node) (render-rule context node))
 
 (define-element "table" (context node) (render-table context node))
-(define-element "tr" (context node) (render-table-row context node))
-(define-element "th" (context node) (render-table-cell context node t))
-(define-element "td" (context node) (render-table-cell context node nil))
+(define-element "tr" (context node) (collect-table-row context node nil))
+(define-element "th" (context node) (collect-table-cell context node nil t))
+(define-element "td" (context node) (collect-table-cell context node nil nil))
 
 (defun markdown-source-nodes (source)
   (cond
