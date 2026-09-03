@@ -7,19 +7,17 @@
   :serial t
   :depends-on (#:alexandria
                #:babel
-               #:cl-ppcre
                #:dexador
-               #:esrap
                #:iterate
+               #:plump
                #:quri
                #:serapeum)
   :components ((:module "src"
-                 :serial t
-                  :components ((:file "package")
-                                   (:file "fetch")
-                                   (:file "html")
-                                  (:file "markdown")
-                                  (:file "cli"))))
+                :serial t
+                :components ((:file "package")
+                             (:file "fetch")
+                             (:file "markdown")
+                             (:file "cli"))))
   :in-order-to ((test-op (test-op #:fetch-gist/tests))))
 
 (asdf:defsystem #:fetch-gist/tests
@@ -30,13 +28,11 @@
   :depends-on (#:fetch-gist
                #:rove)
   :components ((:module "tests"
-                 :serial t
-                 :components ((:file "package")
-                               (:file "suite")
-                                (:file "snapshots")
-                                (:file "fetch")
-                                (:file "html")
-                               (:file "markdown"))))
+                :serial t
+                :components ((:file "package")
+                             (:file "suite")
+                             (:file "fetch")
+                             (:file "markdown"))))
   :perform (asdf:test-op (operation component)
              (declare (ignore operation))
              (uiop:symbol-call '#:rove '#:run component)))

@@ -1,4 +1,0 @@
-(:kind :START-TAG :tag "p" :attrs (("class" . "X")) :data NIL)
-(:kind :TEXT :tag NIL :attrs NIL :data "hi")
-(:kind :END-TAG :tag "p" :attrs NIL :data NIL)
-(:kind :TEXT :tag NIL :attrs NIL :data "\n")

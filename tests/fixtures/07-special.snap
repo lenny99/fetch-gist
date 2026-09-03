@@ -1,8 +1,0 @@
-(:kind :DOCTYPE :tag NIL :attrs NIL :data "html")
-(:kind :TEXT :tag NIL :attrs NIL :data "\n")
-(:kind :COMMENT :tag NIL :attrs NIL :data " a comment ")
-(:kind :TEXT :tag NIL :attrs NIL :data "\n")
-(:kind :CDATA :tag NIL :attrs NIL :data "some cdata content")
-(:kind :TEXT :tag NIL :attrs NIL :data "\n")
-(:kind :PROCESSING-INSTRUCTION :tag "xml" :attrs NIL :data " version=\"1.0\"")
-(:kind :TEXT :tag NIL :attrs NIL :data "\n")

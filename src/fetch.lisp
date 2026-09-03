@@ -46,8 +46,7 @@ body is always decoded to a string using its response charset."
 
 (defun markdown-from-string (html)
   "Convert an HTML string to Markdown."
-  (fetch-gist.markdown:html->markdown
-   (fetch-gist.html:tokenize html)))
+  (fetch-gist.markdown:html->markdown html))
 
 (defun markdown-from-file (pathname)
   "Read PATHNAME as HTML and convert it to Markdown."

@@ -14,27 +14,22 @@
            #:markdown-from-url
            #:*fetch-timeout*))
 
-(defpackage #:fetch-gist.html
-  (:use #:cl #:alexandria #:serapeum #:esrap)
-  (:shadowing-import-from #:iterate
-                          #:in #:until #:count)
-  (:import-from #:iterate
-                #:iter #:for #:collect)
-  (:export #:make-token
-           #:token-kind
-           #:token-tag
-           #:token-attrs
-           #:token-data
-           #:tokenize
-           #:token-kind-p
-           #:find-attr))
-
 (defpackage #:fetch-gist.markdown
-  (:use #:cl #:fetch-gist.html #:alexandria #:serapeum)
+  (:use #:cl #:alexandria #:serapeum)
   (:shadowing-import-from #:iterate
                           #:in #:until #:count)
   (:import-from #:iterate
                 #:iter #:for #:collect)
+  (:import-from #:plump
+                #:parse
+                #:node-p
+                #:nesting-node-p
+                #:text-node-p
+                #:element-p
+                #:children
+                #:text
+                #:tag-name
+                #:attributes)
   (:export #:html->markdown
            #:*inline-elements*
            #:*block-elements*))

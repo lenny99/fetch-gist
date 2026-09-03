@@ -30,6 +30,6 @@ const widget = await client.widgets.create({ name: "demo" });
 > Keep API tokens private. Never commit them to source control.
 
 ![A widget in the Acme dashboard](/images/widget.png) Use `Ctrl` + `K` to open the command palette.  
-The API supports Tom &amp; Jerry names.
+The API supports Tom & Jerry names.
 
 This legacy endpoint is deprecated.
