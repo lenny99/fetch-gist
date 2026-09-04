@@ -5,13 +5,7 @@
   :author "fetch-gist contributors"
   :license "MIT"
   :serial t
-  :depends-on (#:alexandria
-               #:babel
-               #:dexador
-               #:iterate
-               #:plump
-               #:quri
-               #:serapeum)
+  :depends-on (#:dexador #:plump)
   :components ((:module "src"
                 :serial t
                 :components ((:file "package")

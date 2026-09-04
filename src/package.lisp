@@ -1,10 +1,6 @@
 ;;;; package.lisp --- package definition for fetch-gist. -*- Mode: Lisp; -*-
 (defpackage #:fetch-gist
-  (:use #:cl #:alexandria #:serapeum)
-  (:shadowing-import-from #:iterate
-                          #:in #:until #:count)
-  (:import-from #:iterate
-                #:iter #:for #:collect)
+  (:use #:cl)
   (:export #:fetch-url
            #:fetch-url-to-string
            #:html-content-type-p
@@ -15,11 +11,7 @@
            #:*fetch-timeout*))
 
 (defpackage #:fetch-gist.markdown
-  (:use #:cl #:alexandria #:serapeum)
-  (:shadowing-import-from #:iterate
-                          #:in #:until #:count)
-  (:import-from #:iterate
-                #:iter #:for #:collect)
+  (:use #:cl)
   (:import-from #:plump
                 #:parse
                 #:node-p
